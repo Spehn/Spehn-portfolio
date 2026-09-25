@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>Spehn Sebastian — Education</title>
+<style>
+:root{
+  --bg:#050608;
+  --ink:#f4f6f8;
+  --muted:#a9afb8;
+  --line:rgba(240,244,248,.14);
+  --blue:#4d7cff;
+  --blue2:#79a7ff;
+  --paper:#d9e0e8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+body{overflow-x:hidden}
+#field{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.grid{position:absolute;inset:-15%;background-image:
+ linear-gradient(rgba(77,124,255,.08) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(77,124,255,.08) 1px,transparent 1px);
+ background-size:62px 62px;transform:perspective(700px) rotateX(58deg) translateY(13%);
+ opacity:.6}
+.ingredient{position:absolute;border:1px solid rgba(121,167,255,.45);background:rgba(121,167,255,.08);
+ box-shadow:0 0 18px rgba(77,124,255,.12);transform-style:preserve-3d}
+.flour{width:7px;height:7px;border-radius:50%;background:rgba(220,228,238,.72);border:0}
+.leaf{width:15px;height:7px;border-radius:100% 0 100% 0;border-color:rgba(121,167,255,.5)}
+.measure{width:34px;height:10px;border:0;border-top:1px solid rgba(121,167,255,.55)}
+.measure:after{content:"";display:block;width:100%;height:1px;margin-top:5px;background:rgba(121,167,255,.28)}
+.paper{width:90px;height:58px;border-color:rgba(217,224,232,.15);background:rgba(217,224,232,.025)}
+.steam{width:2px;height:55px;border:0;background:linear-gradient(transparent,rgba(121,167,255,.3),transparent);filter:blur(1px)}
+.cursorGlow{position:absolute;width:420px;height:420px;border-radius:50%;
+ background:radial-gradient(circle,rgba(77,124,255,.13),transparent 68%);transform:translate(-50%,-50%)}
+main{position:relative;z-index:2}
+nav{position:fixed;z-index:10;top:0;left:0;width:100%;padding:18px 30px;display:flex;justify-content:space-between;align-items:center;
+ background:linear-gradient(rgba(5,6,8,.92),transparent);transition:.35s;pointer-events:auto}
+.brand{font-size:12px;letter-spacing:.25em;font-weight:700}
+nav .links{display:flex;gap:22px;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:#dfe4ea;text-decoration:none;font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
+nav a:hover{opacity:1;color:var(--blue2)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 9vw 80px;position:relative}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--blue2);text-transform:uppercase}
+h1{font-size:clamp(58px,11vw,150px);line-height:.82;letter-spacing:-.07em;margin:24px 0;color:#fff;max-width:1000px}
+.hero p{max-width:620px;color:var(--muted);font-size:17px;line-height:1.7}
+.hero .stamp{position:absolute;right:9vw;bottom:11vh;width:130px;height:130px;border:1px solid rgba(121,167,255,.42);
+ border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--blue2);font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+section{min-height:100vh;padding:120px 9vw;position:relative}
+.section-head{display:flex;justify-content:space-between;gap:50px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:70px}
+.eyebrow{color:var(--blue2);font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+h2{font-size:clamp(42px,7vw,90px);line-height:.9;letter-spacing:-.05em;margin:12px 0 0}
+.section-head p{max-width:390px;color:var(--muted);line-height:1.6}
+.timeline{position:relative;max-width:1100px;margin:auto}
+.timeline:before{content:"";position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(var(--blue),rgba(121,167,255,.08))}
+.item{position:relative;padding:0 0 95px 82px}
+.dot{position:absolute;left:15px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:1px solid var(--blue2);box-shadow:0 0 20px rgba(77,124,255,.3)}
+.year{font-size:11px;letter-spacing:.25em;color:var(--blue2);margin-bottom:14px}
+.item h3{font-size:clamp(27px,3vw,48px);margin:0 0 12px;letter-spacing:-.03em}
+.item .place{font-size:15px;color:#dce2e9;line-height:1.6}
+.result{display:inline-block;margin-top:18px;padding:9px 13px;border:1px solid var(--line);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#cfd7e0}
+.training{background:linear-gradient(180deg,transparent,rgba(77,124,255,.035),transparent)}
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:1200px;margin:auto}
+.module{min-height:150px;padding:28px;background:rgba(5,6,8,.88);display:flex;flex-direction:column;justify-content:space-between}
+.module small{font-size:9px;letter-spacing:.2em;color:var(--blue2);text-transform:uppercase}
+.module strong{font-size:19px;line-height:1.2}
+.note{max-width:720px;color:var(--muted);line-height:1.75;margin-bottom:45px}
+footer{position:relative;z-index:3;padding:45px 9vw 70px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#858c96;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+@media(max-width:800px){
+ nav{padding:15px}.links{gap:10px!important}
+ .hero,.section{padding-left:7vw;padding-right:7vw}
+ .hero .stamp{display:none}
+ .section-head{display:block}
+ .modules{grid-template-columns:1fr}
+ footer{display:block;line-height:2}
+}
+</style>
+<style id="standard-personal-photo-v2">
+.section-personal-photo{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;isolation:isolate;}
+.section-personal-photo .photo-image{position:absolute;right:-7vw;top:-6vh;width:min(67vw,1050px);height:112vh;object-fit:cover;object-position:center;opacity:.42;filter:brightness(.70) contrast(1.08) saturate(.68);mix-blend-mode:screen;transform:translateZ(45px) scale(1.05);-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.06) 10%,rgba(0,0,0,.38) 24%,#000 43%,#000 84%,rgba(0,0,0,.18) 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.06) 10%,rgba(0,0,0,.38) 24%,#000 43%,#000 84%,rgba(0,0,0,.18) 100%);will-change:transform;}
+.section-personal-photo:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,var(--photo-fade,#050505) 0%,rgba(5,5,5,.80) 17%,rgba(5,5,5,.18) 48%,transparent 76%),linear-gradient(0deg,rgba(5,5,5,.78),transparent 25%,rgba(5,5,5,.10) 76%,rgba(5,5,5,.42));pointer-events:none;}
+.section-personal-photo:after{content:"";position:absolute;inset:8% 7% 7% 16%;border-radius:48%;background:radial-gradient(ellipse at 72% 45%,color-mix(in srgb,var(--nav-accent) 11%,transparent),transparent 66%);filter:blur(20px);pointer-events:none;}
+@media(max-width:760px){.section-personal-photo .photo-image{right:-48vw;width:135vw;opacity:.30}.section-personal-photo{opacity:.9}}
+</style>
+<script id="section-personal-photo-script">
+(()=>{const img=document.querySelector('.section-personal-photo .photo-image');if(!img)return;let tx=0,ty=0,mx=0,my=0;addEventListener('pointermove',e=>{mx=(e.clientX/innerWidth-.5)*8;my=(e.clientY/innerHeight-.5)*6},{passive:true});function f(){tx+=(mx-tx)*.045;ty+=(my-ty)*.045;img.style.setProperty('--photo-x',tx.toFixed(2)+'px');img.style.setProperty('--photo-y',ty.toFixed(2)+'px');requestAnimationFrame(f)}f();})();
+</script>
+<style id="cursor-content-layer-v2">.content,.hero,.hero-copy,.hero-inner,main,.wrap,.page,.panel,.cards,.fixed-title,.site-content{position:relative;z-index:12}</style><style id="unified-navigation-v3">
+:root{--nav-accent:var(--accent,#d7b56d);--nav-accent2:var(--accent2,#f2d39a);--cursor-x:50vw;--cursor-y:50vh;--cursor-px:0px;--cursor-py:0px;--cursor-track-x:0px;--cursor-track-y:0px}
+#siteNav{position:fixed!important;z-index:99999!important;top:14px!important;left:50%!important;right:auto!important;width:min(1280px,calc(100% - 24px))!important;height:58px!important;display:flex!important;align-items:center!important;gap:3px!important;padding:7px 9px!important;border:1px solid color-mix(in srgb,var(--nav-accent) 28%,rgba(255,255,255,.08))!important;border-radius:18px!important;background:rgba(5,5,4,.68)!important;backdrop-filter:blur(20px)!important;-webkit-backdrop-filter:blur(20px)!important;box-shadow:0 18px 70px rgba(0,0,0,.55)!important;transform:translateX(-50%) translateY(0)!important;opacity:1!important;transition:opacity .4s ease,transform .4s ease,filter .4s ease!important;pointer-events:auto!important}
+#siteNav.nav-hidden{opacity:0!important;transform:translateX(-50%) translateY(-24px)!important;filter:blur(3px)!important;pointer-events:none!important}
+#siteNav .site-brand{font:600 16px/1 Georgia,"Times New Roman",serif!important;letter-spacing:.24em!important;color:var(--nav-accent2)!important;text-decoration:none!important;padding:0 15px 0 8px!important;white-space:nowrap!important}
+#siteNav .site-links{display:flex!important;align-items:center!important;justify-content:center!important;gap:1px!important;flex:1!important;min-width:0!important;overflow-x:auto!important;scrollbar-width:none!important}
+#siteNav .site-links::-webkit-scrollbar{display:none!important}
+#siteNav .site-links a{color:#cfc8bc!important;background:transparent!important;text-decoration:none!important;font:600 9px/1 Inter,Arial,sans-serif!important;letter-spacing:.14em!important;padding:11px 9px!important;border-radius:10px!important;white-space:nowrap!important;transition:color .22s ease,background .22s ease,box-shadow .22s ease!important}
+#siteNav .site-links a:hover,#siteNav .site-links a.active{background:linear-gradient(135deg,var(--nav-accent2),var(--nav-accent))!important;color:#080705!important;box-shadow:0 0 22px color-mix(in srgb,var(--nav-accent) 18%,transparent)!important}
+#siteNav .site-cv{margin-left:auto!important;color:var(--nav-accent2)!important;background:transparent!important;border:1px solid color-mix(in srgb,var(--nav-accent) 42%,rgba(255,255,255,.15))!important;text-decoration:none!important;font:700 10px/1 Inter,Arial,sans-serif!important;letter-spacing:.13em!important;padding:10px 13px!important;border-radius:12px!important;white-space:nowrap!important;transition:all .22s ease!important}
+#siteNav .site-cv:hover{background:var(--nav-accent2)!important;color:#080705!important;border-color:var(--nav-accent2)!important}
+@media(max-width:1000px){#siteNav{top:8px!important;height:54px!important;padding:0 10px!important}#siteNav .site-brand{font-size:14px!important;padding-left:5px!important}#siteNav .site-links{justify-content:flex-start!important}#siteNav .site-links a{font-size:8px!important;padding:9px 7px!important}}
+@media(max-width:720px){#siteNav .site-brand{display:none!important}}
+/* universal cursor sensing: glow sits behind typography and tracks every page's atmosphere */
+#cursorImmersion{position:fixed!important;inset:0!important;z-index:1!important;pointer-events:none!important;overflow:hidden!important;mix-blend-mode:screen!important;opacity:1!important}
+#cursorImmersion .cursor-glow{position:absolute!important;left:var(--cursor-x)!important;top:var(--cursor-y)!important;width:420px!important;height:420px!important;transform:translate(-50%,-50%)!important;border-radius:50%!important;background:radial-gradient(circle,color-mix(in srgb,var(--nav-accent) 30%,transparent) 0%,color-mix(in srgb,var(--nav-accent2) 13%,transparent) 28%,transparent 70%)!important;filter:blur(10px)!important}
+#cursorImmersion .cursor-ring{position:absolute!important;left:var(--cursor-x)!important;top:var(--cursor-y)!important;width:230px!important;height:230px!important;transform:translate(-50%,-50%) translate3d(calc(var(--cursor-px)*.18),calc(var(--cursor-py)*.18),0)!important;border:1px solid color-mix(in srgb,var(--nav-accent2) 42%,transparent)!important;border-radius:50%!important;opacity:.68!important}
+#cursorImmersion .cursor-ring.r2{width:500px!important;height:500px!important;transform:translate(-50%,-50%) translate3d(calc(var(--cursor-px)*.32),calc(var(--cursor-py)*.32),0)!important;border-color:color-mix(in srgb,var(--nav-accent) 22%,transparent)!important;opacity:.35!important}
+#cursorImmersion .cursor-sheen{position:absolute!important;inset:-20%!important;background:radial-gradient(ellipse at var(--cursor-x) var(--cursor-y),color-mix(in srgb,var(--nav-accent) 12%,transparent),transparent 20%)!important;transform:translate3d(calc(var(--cursor-px)*-.16),calc(var(--cursor-py)*-.16),0)!important}
+/* additive cursor tracking for common immersion layers; typography is untouched */
+#field,#immersion,.immersion,#fx,#wash,.ambient,.stage-ring,.orbit-line,#particles,.plate-orbit,.photo-glow,.heat,.spark-field,.grid,.orb,.personal-photo-layer,.section-personal-photo,.bg-photo,.field,.fx-field{translate:calc(var(--cursor-track-x)*var(--track-depth,1)) calc(var(--cursor-track-y)*var(--track-depth,1));will-change:translate}
+.field,#field{--track-depth:.95}.grid{--track-depth:.65}.ambient{--track-depth:.55}.stage-ring,.orbit-line{--track-depth:.8}.plate-orbit{--track-depth:1.15}.photo-glow{--track-depth:-.65}.heat{--track-depth:-.45}.spark-field{--track-depth:-.75}.orb{--track-depth:.9}.personal-photo-layer,.section-personal-photo,.bg-photo{--track-depth:.38}
+</style>
+<style id="unique-page-navigation-accent">#siteNav{--nav-accent:#4d7cff !important;--nav-accent2:#9bb5ff !important;}</style></head>
+<body><nav aria-label="Primary navigation" id="siteNav" style="--nav-accent:#4d7cff;--nav-accent2:#9bb5ff;"><a class="site-brand" href="index.html">SPEHN.</a><div class="site-links"><a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="experience.html">EXPERIENCE</a><a href="taste-story.html">TASTE STORY</a><a href="gallery.html">GALLERY</a><a href="skills.html">SKILLS</a><a class="active" href="education.html">EDUCATION</a><a href="volunteer.html">VOLUNTEER</a><a href="achievements.html">ACHIEVEMENTS</a><a href="contact.html">CONTACT</a></div><a class="site-cv" download="" href="Spehn_Sebastian_CV.pdf">CV</a></nav><div aria-hidden="true" id="cursorImmersion"><div class="cursor-glow"></div><div class="cursor-ring"></div><div class="cursor-ring r2"></div><div class="cursor-sheen"></div></div><div aria-hidden="true" class="section-personal-photo" style="--photo-fade:rgba(5,6,8,1)"><img alt="" class="photo-image" src="assets/personal/07-education.png"/></div>
+<div id="field"><div class="grid"></div><div class="cursorGlow"></div></div>
+
+<main>
+<section class="hero">
+<div>
+<div class="kicker">07 — Education</div>
+<h1>Built<br/>to Learn.</h1>
+<p>Academic hospitality education, practical foundations and focused learning through food product development and entrepreneurship.</p>
+</div>
+<div class="stamp">LEARN<br/>MEASURE<br/>CREATE</div>
+</section>
+<section>
+<div class="section-head">
+<div><div class="eyebrow">Academic Foundation</div><h2>The<br/>Foundation.</h2></div>
+<p>A progression from secondary education into formal hospitality and hotel administration.</p>
+</div>
+<div class="timeline">
+<article class="item">
+<span class="dot"></span><div class="year">2022</div>
+<h3>B.Sc. Hospitality and Hotel Administration</h3>
+<div class="place">Institute of Hotel Management and Catering Technology, Thiruvananthapuram</div>
+<span class="result">3-year B.Sc. programme · Completed 2022</span>
+</article>
+<article class="item">
+<span class="dot"></span><div class="year">2019</div>
+<h3>Higher Secondary Education</h3>
+<div class="place">SBHSS Changanassery, Kottayam</div>
+<span class="result">82% aggregate · Completed 2019</span>
+</article>
+<article class="item">
+<span class="dot"></span><div class="year">2017</div>
+<h3>Secondary Education</h3>
+<div class="place">Kendriya Vidyalaya, Rubber Board, Kottayam</div>
+<span class="result">7.2 CGPA / 72% aggregate · Completed 2017</span>
+</article>
+</div>
+</section>
+<section class="training">
+<div class="section-head">
+<div><div class="eyebrow">Nestlé YEP Academy</div><h2>Learning<br/>in Motion.</h2></div>
+<p>Documented learning modules from the Nestlé YEP Academy FoodTech and entrepreneurship training.</p>
+</div>
+<div class="note">The curriculum connects food product thinking, consumer understanding, experimentation, idea generation and solution creation with entrepreneurial learning.</div>
+<div class="modules">
+<div class="module"><small>FoodTech Course</small><strong>Food Product Development</strong></div>
+<div class="module"><small>FoodTech Course</small><strong>Consumer Understanding</strong></div>
+<div class="module"><small>FoodTech Course</small><strong>Design of Experiments</strong></div>
+<div class="module"><small>Entrepreneurship Training</small><strong>Idea Generation</strong></div>
+<div class="module"><small>Entrepreneurship Training</small><strong>Solution Creation</strong></div>
+<div class="module"><small>Academy</small><strong>Successful Entrepreneur</strong></div>
+</div>
+</section>
+<section class="training">
+<div class="section-head">
+<div><div class="eyebrow">ICMR - NIN</div><h2>Nutrition<br/>Knowledge.</h2></div>
+<p>ICMR-NIN nutrition education modules documented in the CV.</p>
+</div>
+<div class="note">A focused set of nutrition education modules covering nutrition fundamentals, maternal and child health, public-health practices and food-related health topics.</div>
+<div class="modules">
+<div class="module"><small>ICMR - NIN</small><strong>Basics of Nutrition</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Mother Health and Nutrition</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Immunization</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Infant and Young Child Feeding</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>WASH</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Anaemia</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Food Fortification</strong></div>
+<div class="module"><small>ICMR - NIN</small><strong>Non-Communicable Diseases</strong></div>
+</div>
+</section>
+<section>
+<div class="section-head">
+<div><div class="eyebrow">Education · 07</div><h2>From<br/>Foundation.</h2></div>
+<p>Knowledge becomes useful when it moves from learning into practice, craft and hospitality.</p>
+</div>
+<div class="note">Hospitality education forms the academic base behind Spehn Sebastian's culinary, operational and food-focused professional journey.</div>
+</section>
+</main>
+<footer>
+<span>EDUCATION · HOSPITALITY · FOOD · LEARNING</span>
+<span>SPEHN SEBASTIAN</span>
+</footer>
+<script>
+const field=document.getElementById('field'), glow=document.querySelector('.cursorGlow');
+const items=[];
+const types=['flour','flour','flour','leaf','measure','paper','steam'];
+for(let i=0;i<155;i++){
+  const el=document.createElement('span');
+  el.className='ingredient '+types[Math.floor(Math.random()*types.length)];
+  el.style.left=(Math.random()*100)+'%';
+  el.style.top=(Math.random()*145)+'%';
+  const s=.55+Math.random()*1.7;
+  el.style.transform=`translate3d(0,0,${Math.round(Math.random()*420-180)}px) scale(${s}) rotate(${Math.random()*360}deg)`;
+  el.dataset.depth=(.25+Math.random()*1.25).toFixed(2);
+  field.appendChild(el);items.push(el);
+}
+let tx=0,ty=0,mx=0,my=0,scrollY=0,lastScroll=0,velocity=0;
+window.addEventListener('pointermove',e=>{
+ mx=(e.clientX/innerWidth-.5); my=(e.clientY/innerHeight-.5);
+ glow.style.left=e.clientX+'px'; glow.style.top=e.clientY+'px';
+});
+window.addEventListener('scroll',()=>{scrollY=window.scrollY; velocity=Math.min(20,Math.abs(scrollY-lastScroll)); lastScroll=scrollY;});
+function animate(){
+ tx+=(mx*26-tx)*.055; ty+=(my*20-ty)*.055;
+ items.forEach((el,i)=>{
+   const d=+el.dataset.depth, drift=Math.sin(performance.now()/650+i)*5;
+   el.style.transform=`translate3d(${tx*d+drift}px,${ty*d-scrollY*.036*d}px,${d*260}px) rotate(${(i*17+scrollY*.07)%360}deg)`;
+   el.style.opacity=.18+.34*d;
+ });
+ document.querySelector('.grid').style.transform=`perspective(700px) rotateX(${58+my*5}deg) rotateZ(${mx*2}deg) translate3d(${tx*.3}px,${-scrollY*.05}px,0)`;
+ requestAnimationFrame(animate);
+}
+animate();
+</script>
+<script id="unified-navigation-v3-script">(()=>{const nav=document.getElementById('siteNav');if(!nav)return;let timer=null;const ACTIVE_MS=10000;const hide=()=>{nav.classList.add('nav-hidden');timer=null};const show=()=>{nav.classList.remove('nav-hidden');clearTimeout(timer);timer=setTimeout(hide,ACTIVE_MS)};hide();window.addEventListener('pointermove',()=>show(),{passive:true});window.addEventListener('touchstart',()=>show(),{passive:true});nav.addEventListener('pointerenter',()=>show());nav.addEventListener('pointermove',()=>show(),{passive:true});})();
+(()=>{const r=document.documentElement;let tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,px=0,py=0,prev=performance.now();window.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;r.style.setProperty('--cursor-x',tx+'px');r.style.setProperty('--cursor-y',ty+'px')},{passive:true});function f(t){const dt=Math.min(32,t-prev);prev=t;x+=(tx-x)*Math.min(1,dt/120);y+=(ty-y)*Math.min(1,dt/120);const dx=x-innerWidth/2,dy=y-innerHeight/2;px+=(dx-px)*.08;py+=(dy-py)*.08;r.style.setProperty('--cursor-px',px.toFixed(2)+'px');r.style.setProperty('--cursor-py',py.toFixed(2)+'px');requestAnimationFrame(f)}requestAnimationFrame(f)})();</script>
+</body>
+</html>
